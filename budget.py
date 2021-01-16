@@ -14,17 +14,25 @@ class Category:
             "amount": -amount,
             "description": description
         })
-        
+
+    def get_balance(self):
+        balance = 0
+        for i in self.ledger:
+            balance += i['amount']
+        return balance    
     
 
 
 # food = Category("food")
-# food.deposite(900,"food")
+# food.deposit(900,"food")
+# food.withdraw(100,"food2")
+# food.deposit(50,"food3")
+
 
 # cloth = Category("cloth")
 # cloth.deposite(500)
 
-# print(food.ledger[0])
+# print(food.get_balance())
 # print(cloth.ledger[0])
 
 
