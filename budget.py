@@ -39,18 +39,22 @@ class Category:
         else:
             return True
     
+    def __str__(self):
+        result = "{}"
+        return result.format(self.name.center(30, "*"))   
+         
 # cloth = Category("cloth")
-# food = Category("food")
+food = Category("food")
 # food.transfer(900, cloth)
-# # food.withdraw(100,"food2")
-# # food.deposit(50,"food3")
+food.withdraw(100,"food2")
+food.deposit(50,"food3")
 
 
 # # cloth.deposite(500)
 
 # # print(food.get_balance())
 # print(cloth.ledger)
-# print(food.ledger)
+print(str(food))
 
 
 def create_spend_chart(categories):
