@@ -10,10 +10,14 @@ class Category:
         })
 
     def withdraw(self, amount, description = ""):
-        self.ledger.append({
-            "amount": -amount,
-            "description": description
-        })
+        if self.check_funds(amount):
+            self.ledger.append({
+                "amount": -amount,
+                "description": description
+            })
+            return True
+        else:
+            return False
 
     def get_balance(self):
         balance = 0
@@ -22,21 +26,31 @@ class Category:
         return balance
 
     def transfer(self, amount, category):
-        self.withdraw(amount, "Transfer to {}".format(category.name))
-        category.deposit(amount, "Transfer from {}".format(self.name))
+        if self.check_funds(amount):
+            self.withdraw(amount, "Transfer to {}".format(category.name))
+            category.deposit(amount, "Transfer from {}".format(self.name))
+            return True
+        else:
+            return False
+
+    def check_funds(self, amount):
+        if self.get_balance() < amount:
+            return False
+        else:
+            return True
     
-cloth = Category("cloth")
-food = Category("food")
-food.transfer(900, cloth)
-# food.withdraw(100,"food2")
-# food.deposit(50,"food3")
+# cloth = Category("cloth")
+# food = Category("food")
+# food.transfer(900, cloth)
+# # food.withdraw(100,"food2")
+# # food.deposit(50,"food3")
 
 
-# cloth.deposite(500)
+# # cloth.deposite(500)
 
-# print(food.get_balance())
-print(cloth.ledger)
-print(food.ledger)
+# # print(food.get_balance())
+# print(cloth.ledger)
+# print(food.ledger)
 
 
 def create_spend_chart(categories):
