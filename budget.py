@@ -40,21 +40,26 @@ class Category:
             return True
     
     def __str__(self):
-        result = "{}"
-        return result.format(self.name.center(30, "*"))   
+        body = ""
+        title = self.name.center(30, "*")
+        total = "Total: {:.2f}".format(self.get_balance())
+        for i in self.ledger:
+            body += "{:.23}{:>{w}.2f}\n".format(i["description"], i["amount"], w = 30-len(i["description"]))
+        txt = "{}\n{}{}"
+        result = txt.format(title, body, total)
+        return result
          
 # cloth = Category("cloth")
 food = Category("food")
 # food.transfer(900, cloth)
+food.deposit(500,"food3")
 food.withdraw(100,"food2")
-food.deposit(50,"food3")
-
-
 # # cloth.deposite(500)
 
 # # print(food.get_balance())
 # print(cloth.ledger)
 print(str(food))
+# print(food.ledger)
 
 
 def create_spend_chart(categories):
