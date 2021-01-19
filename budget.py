@@ -63,4 +63,11 @@ class Category:
 
 
 def create_spend_chart(categories):
-    return "hello world"
+    chart = ""
+    # draw axis
+    for i in range(100, -1, -10):
+        chart += "{:>3}{}\n".format(i, "|")
+    txt = "{}".format(chart)
+    print(txt)
+
+create_spend_chart(["cloth", "food"])
