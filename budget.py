@@ -49,8 +49,8 @@ class Category:
         result = txt.format(title, body, total)
         return result
          
-# cloth = Category("cloth")
-# food = Category("food")
+cloth = Category("cloth")
+food = Category("food")
 # food.transfer(900, cloth)
 # food.deposit(500,"food3")
 # food.withdraw(100,"food2")
@@ -68,6 +68,23 @@ def create_spend_chart(categories):
     for i in range(100, -1, -10):
         chart += "{:>3}{}\n".format(i, "|")
     txt = "{}".format(chart)
-    print(txt)
 
-create_spend_chart(["cloth", "food"])
+    # max length
+    lengths = []
+    for i in categories:
+        lengths.append(len(i.name))
+    maxLength = max(lengths)
+
+    # name of categories
+    catName = ""
+    for x in range(maxLength):
+        catLetters = ""
+        for i in range(len(categories)):
+            if x < lengths[i]:
+                currentName = categories[i].name[x]
+                catLetters += "{}  ".format(currentName)
+        catName += "{}\n".format(catLetters) 
+    
+    print(catName)
+
+create_spend_chart([cloth, food])
