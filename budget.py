@@ -55,7 +55,9 @@ house = Category("house")
 promise = Category("promise")
 # food.transfer(900, cloth)
 food.deposit(500,"food3")
+house.deposit(500,"food3")
 food.withdraw(100,"food2")
+house.withdraw(100,"food2")
 # # cloth.deposite(500)
 
 # # print(food.get_balance())
@@ -79,6 +81,17 @@ def create_spend_chart(categories):
                 total += categories[i].ledger[x]["amount"]
         withdrawArr.append(abs(total))
     print(withdrawArr)
+
+    # withdraw percentage: (category_spent/total_spent)*100
+    total_spent = 0
+    for i in withdrawArr:
+        total_spent += i
+    
+    category_spent = []
+    for i in withdrawArr:
+        category_spent.append((i/total_spent)*100)
+    
+    print(category_spent)
         
     # line
     line = "    -"
