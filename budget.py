@@ -87,19 +87,18 @@ def create_spend_chart(categories):
         modu = perc%10
         round_value = perc-modu
         category_spent.append(round_value)
-    print(category_spent)
     
     # draw axis
     chart = ""
     for i in range(100, -1, -10):
+        # place points
         dot = ""
         for x in category_spent:
             if i<=x:
-                dot += "{}".format("o")
+                dot += "{}".format(" o ")
             else:
-                dot += " "
+                dot += "   "
         chart += "{:>3}{}{}\n".format(i, "|", dot)
-    print(chart)
         
     # line
     line = "    -"
@@ -127,6 +126,6 @@ def create_spend_chart(categories):
         # final
         result = "{}{}\n{}".format(chart, line, catName)
     
-    # print(result)
+    print(result)
 
 create_spend_chart([cloth, food, house, promise])
