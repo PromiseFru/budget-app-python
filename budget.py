@@ -67,11 +67,6 @@ house.withdraw(100,"food2")
 
 
 def create_spend_chart(categories):
-    chart = ""
-    # draw axis
-    for i in range(100, -1, -10):
-        chart += "{:>3}{}\n".format(i, "|")
-
     # withdrawal count
     withdrawArr = []
     for i in range(len(categories)):
@@ -80,7 +75,6 @@ def create_spend_chart(categories):
             if categories[i].ledger[x]["amount"] < 0:
                 total += categories[i].ledger[x]["amount"]
         withdrawArr.append(abs(total))
-    print(withdrawArr)
 
     # withdraw percentage: (category_spent/total_spent)*100
     total_spent = 0
@@ -89,9 +83,23 @@ def create_spend_chart(categories):
     
     category_spent = []
     for i in withdrawArr:
-        category_spent.append((i/total_spent)*100)
-    
+        perc = round((i/total_spent)*100)
+        modu = perc%10
+        round_value = perc-modu
+        category_spent.append(round_value)
     print(category_spent)
+    
+    # draw axis
+    chart = ""
+    for i in range(100, -1, -10):
+        dot = ""
+        for x in category_spent:
+            if i<=x:
+                dot += "{}".format("o")
+            else:
+                dot += " "
+        chart += "{:>3}{}{}\n".format(i, "|", dot)
+    print(chart)
         
     # line
     line = "    -"
