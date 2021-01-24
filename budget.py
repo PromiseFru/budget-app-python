@@ -49,24 +49,9 @@ class Category:
         result = txt.format(title, body, total)
         return result
          
-cloth = Category("cloth")
-food = Category("food")
-house = Category("house")
-promise = Category("promise")
-# food.transfer(900, cloth)
-food.deposit(500,"food3")
-house.deposit(500,"food3")
-food.withdraw(100,"food2")
-house.withdraw(100,"food2")
-# # cloth.deposite(500)
-
-# # print(food.get_balance())
-# print(cloth.ledger)
-# print(str(food))
-# print(food.ledger)
-
-
 def create_spend_chart(categories):
+    # title
+    title = "Percentage spent by category"
     # withdrawal count
     withdrawArr = []
     for i in range(len(categories)):
@@ -95,10 +80,10 @@ def create_spend_chart(categories):
         dot = ""
         for x in category_spent:
             if i<=x:
-                dot += "{}".format(" o ")
+                dot += " o "
             else:
                 dot += "   "
-        chart += "{:>3}{}{}\n".format(i, "|", dot)
+        chart += "{:>3}{}{} \n".format(i, "|", dot)
         
     # line
     line = "    -"
@@ -124,8 +109,5 @@ def create_spend_chart(categories):
         catName += "     {}\n".format(catLetters)
 
         # final
-        result = "{}{}\n{}".format(chart, line, catName)
-    
-    print(result)
-
-create_spend_chart([cloth, food, house, promise])
+        result = "{}\n{}{}\n{}".format(title, chart, line, catName.rstrip("\n"))
+    return result
